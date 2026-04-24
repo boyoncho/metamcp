@@ -172,7 +172,7 @@ tokenRouter.post("/oauth/token", rateLimitToken, async (req, res) => {
 
     // Generate access token
     const accessToken = generateSecureAccessToken();
-    const expiresIn = 3600; // 1 hour
+    const expiresIn = Number(process.env.OAUTH_TOKEN_EXPIRES_IN) || 3600;
 
     // Store access token data
     await oauthRepository.setAccessToken(accessToken, {
